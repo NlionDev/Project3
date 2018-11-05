@@ -7,8 +7,8 @@
 //
 
 //Class AttackWeapons initialization
-class AttackWeapons {
-    private var damages: Int
+class AttackWeapon {
+    var damages: Int
     
     init(damages: Int) {
         self.damages = damages
@@ -16,8 +16,8 @@ class AttackWeapons {
 }
 
 //Class HealWeapons initialization
-class HealWeapons {
-    private var heal: Int
+class HealWeapon {
+  var heal: Int
     
     init(heal: Int) {
         self.heal = heal
@@ -25,49 +25,49 @@ class HealWeapons {
 }
 
 //Class OneHandedSword Initialization
-class OneHandedSword: AttackWeapons {
+class OneHandedSword: AttackWeapon {
     init() {
         super.init(damages: 10)
     }
 }
 
 //Class TwoHandedSword Initialization
-class TwoHandedSword: AttackWeapons {
+class TwoHandedSword: AttackWeapon {
     init() {
         super.init(damages: 15)
     }
 }
 
 //Class OneHandedMass Initialization
-class OneHandedMass: AttackWeapons {
+class OneHandedMass: AttackWeapon {
     init() {
         super.init(damages: 5)
     }
 }
 
 //Class TwoHandedMass Initialization
-class TwoHandedMass: AttackWeapons {
+class TwoHandedMass: AttackWeapon {
     init() {
         super.init(damages: 12)
     }
 }
 
 //Class TwoHandedAxe Initialization
-class TwoHandedAxe: AttackWeapons {
+class TwoHandedAxe: AttackWeapon {
     init() {
         super.init(damages: 20)
     }
 }
 
 //Class MagicStick Initialisation
-class MagicStick: HealWeapons {
+class MagicStick: HealWeapon {
     init() {
         super.init(heal: 10)
     }
 }
 
 //Class MagicWand Initialization
-class MagicWand: HealWeapons {
+class MagicWand: HealWeapon {
     init() {
         super.init(heal: 7)
     }
