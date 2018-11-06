@@ -9,18 +9,34 @@
 //enum Character {
 //    case Warrior
 //    case Magus
+//    case Colossus
+//    case Dwarf
 //
-//    var weapon: AttackWeapon {
+//    var name: String {
+//        switch self {
+//        case .Warrior: return ""
+//        case .Magus: return ""
+//        case .Colossus: return ""
+//        case .Dwarf: return ""
+//        }
+//    }
+//
+//    var weapon: Weapon {
 //        switch self {
 //        case .Warrior: return OneHandedSword()
-//        case .Magus: return OneHandedMass()
+//        case .Magus: return MagicWand()
+//        case .Colossus: return OneHandedMass()
+//        case .Dwarf: return TwoHandedAxe()
+//
 //        }
 //    }
 //
 //    var life: Int {
 //        switch self {
 //        case .Warrior: return 100
-//        case .Magus: return 80
+//        case.Magus: return 80
+//        case .Colossus: return 150
+//        case .Dwarf: return 60
 //        }
 //    }
 //}
@@ -29,24 +45,13 @@
 class Character {
     var characterName: String
     var life: Int
-    
+
     init (characterName: String, life: Int) {
         self.characterName = characterName
         self.life = life
     }
     
-//    func attack(character: Character) {
-//        character.takeDamages(damages: weapon.damages)
-//    }
-//    
-//    func heal(character: Character) {
-//        character.takeHeal(heal: weapon.heal)
-//    }
-    
-    func takeHeal(heal: Int) {
-        life = life + heal
-    }
-    
+    // Function for the character to receive damages
     func takeDamages(damages: Int) {
         life = life - damages
         
@@ -55,6 +60,10 @@ class Character {
         }
     }
     
+    // Function for the character to receive heal
+    func takeHeal(heal: Int) {
+        life = life + heal
+    }
 }
 
 // Class Warrior Initialization
@@ -64,10 +73,10 @@ class Warrior: Character {
     }
     var weapon = OneHandedSword()
     
+    // Function for the character to attack
     func attack(character: Character) {
         character.takeDamages(damages: weapon.damages)
     }
-   
 }
 
 // Class Magus Initialization
@@ -77,6 +86,7 @@ class Magus: Character {
     }
     var weapon = MagicWand()
     
+    // Function for the character to heal
     func heal(character: Character) {
         character.takeHeal(heal: weapon.heal)
     }
@@ -89,10 +99,10 @@ class Colossus: Character{
     }
     var weapon = OneHandedMass()
     
+    // Function for the character to attack
     func attack(character: Character) {
         character.takeDamages(damages: weapon.damages)
     }
-    
 }
 
 //Class Dwarf Initialization
@@ -102,6 +112,7 @@ class Dwarf: Character {
     }
     var weapon = TwoHandedAxe()
     
+    // Function for the character to attack
     func attack(character: Character) {
         character.takeDamages(damages: weapon.damages)
     }

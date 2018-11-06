@@ -19,11 +19,11 @@ class GameManager {
     
 //Variables containing the total health points of the team
     var team1Life: Int {
-        return character1Team1.life + character2Team2.life + character3Team1.life
+        return team1[0].life + team1[1].life + team1[2].life
     }
-    
+
     var team2Life: Int {
-        return character1Team2.life + character2Team2.life + character3Team2.life
+        return team2[0].life + team2[1].life + team2[2].life
     }
     
 // Creation of the variables which will containe the player's name
@@ -54,7 +54,6 @@ class GameManager {
             + "\n4. The Dwarf, does a lot of damage but is not very resistant.")
     }
     
-
     
 //// Function that display the name of the characters of the team
 //    func displayTeam1() {
@@ -95,6 +94,9 @@ class GameManager {
 //            + "3. \(character3Team2.characterName)")
 //    }
     
+    
+
+    
 // Function that will resume last actions
     func resumeActions() {
         
@@ -102,64 +104,132 @@ class GameManager {
     
 // Function for create a character
     func createCharacter(teamName: inout [String], classe: Character, team: inout [Character]) -> Character {
-        if let name = readLine() {
-            if teamName.contains(name) {
-                print("This name already exists, choose another.")
-            } else {
-                teamName.append(name)
-            }
+        var chosenName = ""
+
+            if let name = readLine() {
+                if teamName.contains(name) {
+                    repeat {
+                        print("This name already exists, choose another.")
+                        if let name = readLine() {
+                            chosenName = name
+                        }
+                    } while teamName.contains(chosenName)
+                    teamName.append(chosenName)
+                }else {
+                    teamName.append(name)
+                   team.append(classe)
         }
-        team.append(classe)
+   }
         return classe
-    }
+}
     
 // Function that will create the player's team
-    func createTeam(playerNames: String, teamNames: inout [String], teams: inout [Character], player: String){
-        print("Player \(player), what's your name ?")
+    func createTeam1() {
+        print("Player One, what's your name ?")
         if let playerName = readLine(){
-            playerNames = playerName
-            print("Welcome to the batlle \(playerNames) !")
+            player1Name = playerName
+            print("Welcome to the batlle \(playerName) !")
         }
         
-        for i in 1...3 {
+        print("You have to choose 3 characters.")
+        
+        for _ in 1...3 {
+            
+            var player1Choice = ""
             
              teamSelectionMenu()
+            repeat {
             if let choice = readLine() {
+                player1Choice = choice
                 switch choice {
                 case "1":
                     print("You choose The Warior, what's his name ?")
-                    createCharacter(teamName: &teamNames, classe: Warrior(), team: &teams)
+                    createCharacter(teamName: &team1Names, classe: Warrior(), team: &team1)
                     
                 case "2":
                     print("You choose The Magus, what's his name ?")
-                    createCharacter(teamName: &teamNames, classe: Magus(), team: &teams)
+                    createCharacter(teamName: &team1Names, classe: Magus(), team: &team1)
                     
                 case "3":
                     print("You choose The Colossus, what's his name ?")
-                    createCharacter(teamName: &teamNames, classe: Colossus(), team: &teams)
+                    createCharacter(teamName: &team1Names, classe: Colossus(), team: &team1)
                     
                 case "4":
                     print("You choose The Dwarf, what's his name ?")
-                    createCharacter(teamName: &teamNames, classe: Dwarf(), team: &teams)
+                    createCharacter(teamName: &team1Names, classe: Dwarf(), team: &team1)
                     
                 default:
                     print("I don't understand.")
                     teamSelectionMenu()
                 }
             }
-        }
+        } while player1Choice != "1" && player1Choice != "2" && player1Choice != "3" && player1Choice != "4"
     }
+}
     
+    // Function that will create the player's team
+    func createTeam2() {
+        print("Player Two, what's your name ?")
+        if let playerName = readLine(){
+            player2Name = playerName
+            print("Welcome to the batlle \(playerName) !")
+        }
+        
+           print("You have to choose 3 characters too.")
+        
+        
+        for _ in 1...3 {
+            
+            var player2Choice = ""
+            
+            teamSelectionMenu()
+            repeat {
+                if let choice = readLine() {
+                 player2Choice = choice
+                    
+                switch choice {
+                case "1":
+                    print("You choose The Warior, what's his name ?")
+                    createCharacter(teamName: &team2Names, classe: Warrior(), team: &team2)
+                    
+                case "2":
+                    print("You choose The Magus, what's his name ?")
+                    createCharacter(teamName: &team2Names, classe: Magus(), team: &team2)
+                    
+                case "3":
+                    print("You choose The Colossus, what's his name ?")
+                    createCharacter(teamName: &team2Names, classe: Colossus(), team: &team2)
+                    
+                case "4":
+                    print("You choose The Dwarf, what's his name ?")
+                    createCharacter(teamName: &team2Names, classe: Dwarf(), team: &team2)
+                    
+                default:
+                    print("I don't understand.")
+                    teamSelectionMenu()
+                }
+            }
+        } while player2Choice != "1" && player2Choice != "2" && player2Choice != "3" && player2Choice != "4"
+    }
+}
+    
+//Function for the unfolding of the party
+    func playGame() {
 
-    
-////Function for the unfolding of the party
-//    func playGame() {
-//
-//
+        welcome()
+        createTeam1()
+        createTeam2()
+        
+        
 //        while team1Life > 0 && team2Life > 0 {
 //
-//           }
-//
+//        }
+        
+        
 }
+    
+    
+}
+
 
 
