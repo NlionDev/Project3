@@ -8,7 +8,7 @@
 
 var gameManager = GameManager()
 
-
+gameManager.playGame()
 
 
 
