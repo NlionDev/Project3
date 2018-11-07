@@ -103,7 +103,7 @@ class GameManager {
     }
     
 // Function for create a character
-    func createCharacter(teamName: inout [String], classe: Character, team: inout [Character]) -> Character {
+    func createCharacter(teamName: inout [String], classe: Character) -> Character {
         var chosenName = ""
 
             if let name = readLine() {
@@ -117,7 +117,6 @@ class GameManager {
                     teamName.append(chosenName)
                 }else {
                     teamName.append(name)
-                   team.append(classe)
         }
    }
         return classe
@@ -144,20 +143,20 @@ class GameManager {
                 switch choice {
                 case "1":
                     print("You choose The Warior, what's his name ?")
-                    createCharacter(teamName: &team1Names, classe: Warrior(), team: &team1)
-                    
+                    createCharacter(teamName: &team1Names, classe: Warrior())
+                    team1.append(Warrior())
                 case "2":
                     print("You choose The Magus, what's his name ?")
-                    createCharacter(teamName: &team1Names, classe: Magus(), team: &team1)
-                    
+                    createCharacter(teamName: &team1Names, classe: Magus())
+                    team1.append(Magus())
                 case "3":
                     print("You choose The Colossus, what's his name ?")
-                    createCharacter(teamName: &team1Names, classe: Colossus(), team: &team1)
-                    
+                    createCharacter(teamName: &team1Names, classe: Colossus())
+                    team1.append(Colossus())
                 case "4":
                     print("You choose The Dwarf, what's his name ?")
-                    createCharacter(teamName: &team1Names, classe: Dwarf(), team: &team1)
-                    
+                    createCharacter(teamName: &team1Names, classe: Dwarf())
+                    team1.append(Dwarf())
                 default:
                     print("I don't understand.")
                     teamSelectionMenu()
@@ -179,7 +178,6 @@ class GameManager {
         
         
         for _ in 1...3 {
-            
             var player2Choice = ""
             
             teamSelectionMenu()
@@ -190,20 +188,20 @@ class GameManager {
                 switch choice {
                 case "1":
                     print("You choose The Warior, what's his name ?")
-                    createCharacter(teamName: &team2Names, classe: Warrior(), team: &team2)
-                    
+                    createCharacter(teamName: &team2Names, classe: Warrior())
+                    team2.append(Warrior())
                 case "2":
                     print("You choose The Magus, what's his name ?")
-                    createCharacter(teamName: &team2Names, classe: Magus(), team: &team2)
-                    
+                    createCharacter(teamName: &team2Names, classe: Magus())
+                    team2.append(Magus())
                 case "3":
                     print("You choose The Colossus, what's his name ?")
-                    createCharacter(teamName: &team2Names, classe: Colossus(), team: &team2)
-                    
+                    createCharacter(teamName: &team2Names, classe: Colossus())
+                    team2.append(Colossus())
                 case "4":
                     print("You choose The Dwarf, what's his name ?")
-                    createCharacter(teamName: &team2Names, classe: Dwarf(), team: &team2)
-                    
+                    createCharacter(teamName: &team2Names, classe: Dwarf())
+                    team2.append(Dwarf())
                 default:
                     print("I don't understand.")
                     teamSelectionMenu()
