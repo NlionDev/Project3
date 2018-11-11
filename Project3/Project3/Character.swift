@@ -39,19 +39,30 @@
 //        case .Dwarf: return 60
 //        }
 //    }
+//
 //}
 
 // Class Character Initialization
 class Character {
     var characterName: String
     var life: Int
+    var type: String
+    var weapon: Weapon
 
-    init (characterName: String, life: Int) {
+    init (characterName: String, life: Int, type: String, weapon: Weapon) {
         self.characterName = characterName
         self.life = life
+        self.type = type
+        self.weapon = weapon
     }
     
-    // Function for the character to receive damages
+// Function for the character to attack
+    func attack(character: Character) {
+        character.takeDamages(damages: weapon.damages)
+    }
+
+    
+// Function for the character to receive damages
     func takeDamages(damages: Int) {
         life = life - damages
         
@@ -60,7 +71,12 @@ class Character {
         }
     }
     
-    // Function for the character to receive heal
+// Function for the character to heal
+    func heal(character: Character) {
+        character.takeHeal(heal: weapon.heal)
+    }
+    
+// Function for the character to receive heal
     func takeHeal(heal: Int) {
         life = life + heal
     }
@@ -69,52 +85,29 @@ class Character {
 // Class Warrior Initialization
 class Warrior: Character {
     init() {
-        super.init(characterName: "", life: 100)
+        super.init(characterName: "", life: 100, type: "Warrior", weapon: OneHandedSword())
     }
-    var weapon = OneHandedSword()
-    
-    // Function for the character to attack
-    func attack(character: Character) {
-        character.takeDamages(damages: weapon.damages)
-    }
+
 }
 
 // Class Magus Initialization
 class Magus: Character {
     init() {
-        super.init(characterName: "", life: 80)
-    }
-    var weapon = MagicWand()
-    
-    // Function for the character to heal
-    func heal(character: Character) {
-        character.takeHeal(heal: weapon.heal)
+        super.init(characterName: "", life: 80, type: "Magus", weapon: MagicWand())
     }
 }
 
 // Class Colossus Initialization
 class Colossus: Character{
     init() {
-        super.init(characterName: "", life: 150)
-    }
-    var weapon = OneHandedMass()
-    
-    // Function for the character to attack
-    func attack(character: Character) {
-        character.takeDamages(damages: weapon.damages)
+        super.init(characterName: "", life: 150, type: "Colossus", weapon: OneHandedMass())
     }
 }
 
 //Class Dwarf Initialization
 class Dwarf: Character {
     init() {
-        super.init(characterName: "", life: 60)
-    }
-    var weapon = TwoHandedAxe()
-    
-    // Function for the character to attack
-    func attack(character: Character) {
-        character.takeDamages(damages: weapon.damages)
+        super.init(characterName: "", life: 60, type: "Dwarf", weapon: TwoHandedAxe())
     }
 }
 
