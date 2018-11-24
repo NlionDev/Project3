@@ -24,7 +24,7 @@ enum CharacterType: Int {
     }
 
     var life: Int {
-        switch self {
+            switch self {
         case .Warrior: return 100
         case.Magus: return 80
         case .Colossus: return 150
@@ -47,51 +47,45 @@ enum CharacterType: Int {
 class Character {
     var characterName: String
     var characterType: CharacterType
+    var characterLife: Int
+    var characterWeapon: Weapon
 
-    init (characterName: String, characterType: CharacterType) {
+    init (characterName: String, characterType: CharacterType, characterLife: Int, characterWeapon: Weapon) {
         self.characterName = characterName
         self.characterType = characterType
+        self.characterLife = characterType.life
+        self.characterWeapon = characterType.weapon
     }
     
     // Function for the character to attack
     func attack(character: Character) {
-        character.takeDamages(damages: weapon.damages)
+        character.takeDamages(damages: characterWeapon.damages)
     }
 
     
     // Function for the character to heal
     func heal(character: Character) {
-        character.takeHeal(heal: weapon.heal)
+        character.takeHeal(heal: characterWeapon.heal)
     }
     
-    func action() -> Void {
-        switch characterType {
-        case .Warrior: return attack
-        case .Magus: return heal
-        case .Colossus: return attack
-        case .Dwarf: return attack
-            
-        }
-        
-    }
+    
     
 
     
-// Function for the character to receive damages
+    // Function for the character to receive damages
     func takeDamages(damages: Int) {
-        life = life - damages
-        
-        if life < 0 {
-            life = 0
+        characterLife -= damages
+        if characterLife < 0 {
+            characterLife = 0
         }
     }
     
 
-    
-// Function for the character to receive heal
+    // Function for the character to receive heal
     func takeHeal(heal: Int) {
-        life = life + heal
+        characterLife += heal
     }
-}
+   
+    }
 
 

@@ -6,23 +6,6 @@
 //  Copyright © 2018 Nicolas Lion. All rights reserved.
 //
 
-////Class AttackWeapons initialization
-//class AttackWeapon {
-//    var damages: Int
-//
-//    init(damages: Int) {
-//        self.damages = damages
-//    }
-//}
-//
-////Class HealWeapons initialization
-//class HealWeapon {
-//  var heal: Int
-//
-//    init(heal: Int) {
-//        self.heal = heal
-//    }
-//}
 
 class Weapon {
     var damages: Int
@@ -34,50 +17,62 @@ class Weapon {
     }
 }
 
+//Class AttackWeapons initialization
+class AttackWeapon: Weapon {
+ 
+}
+
+//Class HealWeapons initialization
+class HealWeapon: Weapon {
+
+    }
+
+
+
 //Class OneHandedSword Initialization
-class OneHandedSword: Weapon {
+class OneHandedSword: AttackWeapon {
     init() {
         super.init(damages: 10, heal: 0)
     }
 }
 
 //Class TwoHandedSword Initialization
-class TwoHandedSword: Weapon {
+class TwoHandedSword: AttackWeapon {
     init() {
         super.init(damages: 15, heal: 0)
     }
 }
 
 //Class OneHandedMass Initialization
-class OneHandedMass: Weapon {
+class OneHandedMass: AttackWeapon {
     init() {
         super.init(damages: 5, heal: 0)
     }
 }
 
 //Class TwoHandedMass Initialization
-class TwoHandedMass: Weapon {
+class TwoHandedMass: AttackWeapon {
     init() {
         super.init(damages: 12, heal: 0)
     }
 }
 
 //Class TwoHandedAxe Initialization
-class TwoHandedAxe: Weapon {
+class TwoHandedAxe: AttackWeapon {
     init() {
         super.init(damages: 20, heal: 0)
     }
 }
 
 //Class MagicStick Initialisation
-class MagicStick: Weapon {
+class MagicStick: HealWeapon {
     init() {
         super.init(damages: 0, heal: 10)
     }
 }
 
 //Class MagicWand Initialization
-class MagicWand: Weapon {
+class MagicWand: HealWeapon {
     init() {
         super.init(damages: 0, heal: 7)
     }
