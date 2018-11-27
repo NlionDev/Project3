@@ -10,70 +10,112 @@
 class Weapon {
     var damages: Int
     var heal: Int
+    var isAttack: Bool
+    var name: String
     
-    init(damages: Int, heal: Int) {
+    init(damages: Int, heal: Int, isAttack: Bool, name: String) {
         self.damages = damages
         self.heal = heal
+        self.isAttack = isAttack
+        self.name = name
     }
 }
 
-//Class AttackWeapons initialization
-class AttackWeapon: Weapon {
- 
+class WeaponFactory {
+    
+    enum Category {
+        case OneHandedSword
+        case TwoHandedSword
+        case OneHandedMass
+        case TwoHandedMass
+        case OneHandedAxe
+        case TwoHandedAxe
+        case Scepter
+        case MagicStick
+        case MagicWand
+    }
+    
+    func create(_ category: Category) -> Weapon {
+        switch category {
+        case .OneHandedSword: return Weapon(damages: 10, heal: 0, isAttack: true, name: "One Handed Sword")
+        case .TwoHandedSword: return Weapon(damages: 15, heal: 0, isAttack: true, name: "Two Handed Sword")
+        case .OneHandedMass: return Weapon(damages: 5, heal: 0, isAttack: true, name: "One Handed Mass")
+        case .TwoHandedMass: return Weapon(damages: 12, heal: 0, isAttack: true, name: "Two Handed Mass")
+        case .OneHandedAxe: return Weapon(damages: 8, heal: 0, isAttack: true, name: "One Handed Axe")
+        case .TwoHandedAxe: return Weapon(damages: 20, heal: 0, isAttack: true, name: "Two Handed Axe")
+        case .Scepter: return Weapon(damages: 0, heal: 13, isAttack: false, name: "Scepter")
+        case .MagicStick: return Weapon(damages: 0, heal: 10, isAttack: false, name: "Magic Stick")
+        case .MagicWand: return Weapon(damages: 0, heal: 7, isAttack: false, name: "Magic Wand")
+        }
+    }
+    
+//    func createRandomAttackWeapon() -> Weapon {
+//        
+//    }
+//    
+//    func createRandomHealWeapon() -> Weapon {
+//        
+//    }
+    
 }
 
-//Class HealWeapons initialization
-class HealWeapon: Weapon {
+////Class AttackWeapons initialization
+//class AttackWeapon: Weapon {
+//
+//}
+//
+////Class HealWeapons initialization
+//class HealWeapon: Weapon {
+//
+//    }
 
-    }
 
 
-
-//Class OneHandedSword Initialization
-class OneHandedSword: AttackWeapon {
-    init() {
-        super.init(damages: 10, heal: 0)
-    }
-}
-
-//Class TwoHandedSword Initialization
-class TwoHandedSword: AttackWeapon {
-    init() {
-        super.init(damages: 15, heal: 0)
-    }
-}
-
-//Class OneHandedMass Initialization
-class OneHandedMass: AttackWeapon {
-    init() {
-        super.init(damages: 5, heal: 0)
-    }
-}
-
-//Class TwoHandedMass Initialization
-class TwoHandedMass: AttackWeapon {
-    init() {
-        super.init(damages: 12, heal: 0)
-    }
-}
-
-//Class TwoHandedAxe Initialization
-class TwoHandedAxe: AttackWeapon {
-    init() {
-        super.init(damages: 20, heal: 0)
-    }
-}
-
-//Class MagicStick Initialisation
-class MagicStick: HealWeapon {
-    init() {
-        super.init(damages: 0, heal: 10)
-    }
-}
-
-//Class MagicWand Initialization
-class MagicWand: HealWeapon {
-    init() {
-        super.init(damages: 0, heal: 7)
-    }
-}
+////Class OneHandedSword Initialization
+//class OneHandedSword: AttackWeapon {
+//    init() {
+//        super.init(damages: 10, heal: 0)
+//    }
+//}
+//
+////Class TwoHandedSword Initialization
+//class TwoHandedSword: AttackWeapon {
+//    init() {
+//        super.init(damages: 15, heal: 0)
+//    }
+//}
+//
+////Class OneHandedMass Initialization
+//class OneHandedMass: AttackWeapon {
+//    init() {
+//        super.init(damages: 5, heal: 0)
+//    }
+//}
+//
+////Class TwoHandedMass Initialization
+//class TwoHandedMass: AttackWeapon {
+//    init() {
+//        super.init(damages: 12, heal: 0)
+//    }
+//}
+//
+////Class TwoHandedAxe Initialization
+//class TwoHandedAxe: AttackWeapon {
+//    init() {
+//        super.init(damages: 20, heal: 0)
+//    }
+//}
+//
+////Class MagicStick Initialisation
+//class MagicStick: HealWeapon {
+//    init() {
+//        super.init(damages: 0, heal: 10)
+//    }
+//}
+//
+////Class MagicWand Initialization
+//class MagicWand: HealWeapon {
+//    init() {
+//        super.init(damages: 0, heal: 7)
+//    }
+//}
