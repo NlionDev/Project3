@@ -16,8 +16,8 @@ class GameManager {
     
     var numbersOfTurn = 0
     
-    
-    var factory = CharacterFactory()
+    var characterFactory = CharacterFactory()
+    var weaponFactory = WeaponFactory()
     
     // Creation of the variables which will containe the player's name
     var player1Name = ""
@@ -222,6 +222,32 @@ class GameManager {
         
         let player1Character = player1AllyChoice()
         
+        let getRandomInt = Int.random(in: 1...3)
+        let getRandomWeapon = Int.random(in: 1...9)
+        
+        if getRandomInt == 2 {
+            print("Wow, a chest appears !")
+            print("\(player1Character.name) open the chest..")
+            let weaponRawValue = getRandomWeapon
+            let weaponType = WeaponFactory.Category(rawValue: weaponRawValue)
+            
+            let randomWeapon = weaponFactory.create(weaponType!)
+            print("..and found a \(randomWeapon.name) !")
+            
+            if player1Character.type == "Magus" && randomWeapon.isAttack == false {
+                player1Character.weapon = randomWeapon
+                print("\(player1Character.name) equips himself with \(randomWeapon.name)")
+            } else if player1Character.type == "Magus" && randomWeapon.isAttack == true {
+                print("\(player1Character.name) can not equips himself with \(randomWeapon.name)")
+            } else if player1Character.type != "Magus" && randomWeapon.isAttack == false {
+                print("\(player1Character.name) can not equips himself with \(randomWeapon.name)")
+            } else {
+                player1Character.weapon = randomWeapon
+                print("\(player1Character.name) equips himself with \(randomWeapon.name)")
+            }
+        }
+        
+        
         if player1Character.type == "Magus" {
             print("Who do you want to heal ?")
             displayTeam1()
@@ -251,6 +277,31 @@ class GameManager {
         
         
         let player2Character = player2AllyChoice()
+        
+        let getRandomInt = Int.random(in: 1...3)
+        let getRandomWeapon = Int.random(in: 1...9)
+        
+        if getRandomInt == 2 {
+            print("Wow, a chest appears !")
+            print("\(player2Character.name) open the chest..")
+            let weaponRawValue = getRandomWeapon
+            let weaponType = WeaponFactory.Category(rawValue: weaponRawValue)
+            
+            let randomWeapon = weaponFactory.create(weaponType!)
+            print("..and found a \(randomWeapon.name) !")
+            
+            if player2Character.type == "Magus" && randomWeapon.isAttack == false {
+                player2Character.weapon = randomWeapon
+                print("\(player2Character.name) equips himself with \(randomWeapon.name)")
+            } else if player2Character.type == "Magus" && randomWeapon.isAttack == true {
+                print("\(player2Character.name) can not equips himself with \(randomWeapon.name)")
+            } else if player2Character.type != "Magus" && randomWeapon.isAttack == false {
+                print("\(player2Character.name) can not equips himself with \(randomWeapon.name)")
+            } else {
+                player1Character.weapon = randomWeapon
+                print("\(player2Character.name) equips himself with \(randomWeapon.name)")
+            }
+        }
         
         if player2Character.type == "Magus" {
             print("Who do you want to heal ?")
@@ -306,7 +357,7 @@ class GameManager {
             print("What's his name ?")
             
             let name = getUniqueName()
-            let character = factory.create(characterType, name: name)
+            let character = characterFactory.create(characterType, name: name)
             return character
             
         } else {

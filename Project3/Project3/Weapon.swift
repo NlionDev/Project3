@@ -23,16 +23,16 @@ class Weapon {
 
 class WeaponFactory {
     
-    enum Category {
-        case OneHandedSword
-        case TwoHandedSword
-        case OneHandedMass
-        case TwoHandedMass
-        case OneHandedAxe
-        case TwoHandedAxe
-        case Scepter
-        case MagicStick
-        case MagicWand
+    enum Category: Int {
+        case OneHandedSword = 1
+        case TwoHandedSword = 2
+        case OneHandedMass = 3
+        case TwoHandedMass = 4
+        case OneHandedAxe = 5
+        case TwoHandedAxe = 6
+        case Scepter = 7
+        case MagicStick = 8
+        case MagicWand = 9
     }
     
     func create(_ category: Category) -> Weapon {
