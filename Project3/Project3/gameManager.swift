@@ -49,9 +49,19 @@ class GameManager {
             if choice == "1" {
                 playerChoice = team1[0]
             } else if choice == "2" {
-                playerChoice = team1[1]
+                if team1.count == 1 {
+                    print("Error")
+                    return player1AllyChoice()
+                } else {
+                    playerChoice = team1[1]
+                }
             } else if choice == "3" {
-                playerChoice = team1[2]
+                if team1.count == 2 {
+                    print("Error")
+                    return player1AllyChoice()
+                } else {
+                    playerChoice = team1[2]
+                }
             } else {
                 print("Error")
                 return player1AllyChoice()
@@ -67,9 +77,19 @@ class GameManager {
             if choice == "1" {
                 playerChoice = team1[0]
             } else if choice == "2" {
-                playerChoice = team1[1]
+                if team1.count == 1 {
+                    print("Error")
+                    return player1HealChoice()
+                } else {
+                    playerChoice = team1[1]
+                }
             } else if choice == "3" {
-                playerChoice = team1[2]
+                if team1.count == 2 {
+                    print("Error")
+                    return player1HealChoice()
+                } else {
+                    playerChoice = team1[2]
+                }
             } else {
                 print("Error")
                 return player1HealChoice()
@@ -85,9 +105,19 @@ class GameManager {
             if choice == "1" {
                 playerChoice = team2[0]
             } else if choice == "2" {
-                playerChoice = team2[1]
+                if team2.count == 1 {
+                    print("Error")
+                    return player1OpponentChoice()
+                } else {
+                    playerChoice = team2[1]
+                }
             } else if choice == "3" {
-                playerChoice = team2[2]
+                if team2.count == 2 {
+                    print("Error")
+                    return player1OpponentChoice()
+                } else {
+                    playerChoice = team2[2]
+                }
             } else {
                 print("Error")
                 return player1OpponentChoice()
@@ -103,9 +133,19 @@ class GameManager {
             if choice == "1" {
                 playerChoice = team2[0]
             } else if choice == "2" {
-                playerChoice = team2[1]
+                if team2.count == 1 {
+                    print("Error")
+                    return player2AllyChoice()
+                } else {
+                    playerChoice = team2[1]
+                }
             } else if choice == "3" {
-                playerChoice = team2[2]
+                if team2.count == 2 {
+                    print("Error")
+                    return player2AllyChoice()
+                } else {
+                    playerChoice = team2[2]
+                }
             } else {
                 print("Error")
                 return player2AllyChoice()
@@ -122,8 +162,20 @@ class GameManager {
                 playerChoice = team2[0]
             } else if choice == "2" {
                 playerChoice = team2[1]
+                if playerChoice == nil {
+                    print("Error")
+                    return player2HealChoice()
+                } else {
+                    playerChoice = team2[1]
+                }
             } else if choice == "3" {
                 playerChoice = team2[2]
+                if playerChoice == nil {
+                    print("Error")
+                    return player2HealChoice()
+                } else {
+                    playerChoice = team2[2]
+                }
             } else {
                 print("Error")
                 return player2HealChoice()
@@ -139,9 +191,19 @@ class GameManager {
             if choice == "1" {
                 playerChoice = team1[0]
             } else if choice == "2" {
-                playerChoice = team1[1]
+                if team1.count == 1 {
+                    print("Error")
+                    return player2OpponentChoice()
+                } else {
+                    playerChoice = team1[1]
+                }
             } else if choice == "3" {
-                playerChoice = team1[2]
+                if team1.count == 2 {
+                    print("Error")
+                    return player2OpponentChoice()
+                } else {
+                    playerChoice = team1[2]
+                }
             } else {
                 print("Error")
                 return player2OpponentChoice()
@@ -210,7 +272,7 @@ class GameManager {
     
     // Function for players to choose their actions
     func player1Turn() {
-        
+            
         print("\(player1Name) it's your turn.")
         print("Here is your team :")
         displayTeam1()
@@ -220,9 +282,7 @@ class GameManager {
         for character in team1 {
             print("\(character.name) The \(character.type)")
         }
-        
         let player1Character = player1AllyChoice()
-        
         let getRandomInt = Int.random(in: 1...3)
         let getRandomWeapon = Int.random(in: 1...9)
         
@@ -247,9 +307,7 @@ class GameManager {
                 print("\(player1Character.name) equips himself with \(randomWeapon.name)")
             }
             numberOfChest += 1
-        }
-        
-        
+            }
         if player1Character.type == "Magus" {
             print("Who do you want to heal ?")
             displayTeam1()
@@ -267,6 +325,7 @@ class GameManager {
 
     
     func player2Turn() {
+            
         print("\(player2Name) it's your turn.")
         print("Here is your team :")
         displayTeam2()
@@ -408,21 +467,48 @@ class GameManager {
         createTeam1()
         createTeam2()
         
-        while !team1.isEmpty || !team2.isEmpty {
+        while team1.count != 0 || team2.count != 0 {
             
+            if team1.isEmpty {
+                break
+            } else if team2.isEmpty {
+                break
+            } else {
             player1Turn()
             player2Turn()
-            
+            }
         }
         
-        if team1.isEmpty {
+        if team1.count == 0 {
             print("\(player2Name) is the Winner !")
         } else {
             print("\(player1Name) is the Winner !")
         }
         
         print("In this game, \(numbersOfTurn) turns were played, \(numberOfChest) chests were found and \(numberOfCriticalStrike) critical strike were inflicted.")
+        displayNewgame()
+        newGame()
     }
+    
+    func displayNewgame() {
+        print("Do you want to play a new game ?")
+        print("1. Yes.")
+        print("2. No.")
+    }
+    
+    func newGame() {
+        if let choice = readLine() {
+            if choice == "1" {
+                return playGame()
+            } else if choice == "2" {
+                print("Thanks for playing Warlords !")
+            } else {
+                print("Error")
+                return newGame()
+            }
+        }
+    }
+    
 }
 
 
