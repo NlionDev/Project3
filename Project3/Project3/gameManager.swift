@@ -15,6 +15,7 @@ class GameManager {
     var team2: [Character] = []
     
     var numbersOfTurn = 0
+    var numberOfChest = 0
     
     var characterFactory = CharacterFactory()
     var weaponFactory = WeaponFactory()
@@ -245,6 +246,7 @@ class GameManager {
                 player1Character.weapon = randomWeapon
                 print("\(player1Character.name) equips himself with \(randomWeapon.name)")
             }
+            numberOfChest += 1
         }
         
         
@@ -298,9 +300,10 @@ class GameManager {
             } else if player2Character.type != "Magus" && randomWeapon.isAttack == false {
                 print("\(player2Character.name) can not equips himself with \(randomWeapon.name)")
             } else {
-                player1Character.weapon = randomWeapon
+                player2Character.weapon = randomWeapon
                 print("\(player2Character.name) equips himself with \(randomWeapon.name)")
             }
+            numberOfChest += 1
         }
         
         if player2Character.type == "Magus" {
@@ -413,10 +416,12 @@ class GameManager {
         }
         
         if team1.isEmpty {
-            print("\(player2Name) is the Winner in \(numbersOfTurn) turns !")
+            print("\(player2Name) is the Winner !")
         } else {
-            print("\(player1Name) is the Winner in \(numbersOfTurn) turns !")
+            print("\(player1Name) is the Winner !")
         }
+        
+        print("In this game, \(numbersOfTurn) turns were played, \(numberOfChest) chests were found and \(numberOfCriticalStrike) critical strike were inflicted.")
     }
 }
 

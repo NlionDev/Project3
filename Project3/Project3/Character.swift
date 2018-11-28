@@ -43,6 +43,8 @@
 //
 //}
 
+var numberOfCriticalStrike = 0
+
 class CharacterFactory {
     enum CharacterType: Int {
         case Warrior = 1
@@ -94,7 +96,16 @@ class Character {
     
     // Function for the character to receive damages
     func takeDamages(damages: Int) {
-        life -= damages
+        let criticalRandom = Int.random(in: 1...3)
+        let criticalStrike = damages * 2
+        
+        if criticalRandom == 2 {
+            life -= criticalStrike
+            print("Woah, it's a critical strike !")
+            numberOfCriticalStrike += 1
+        } else {
+            life -= damages
+        }
         if life < 0 {
             life = 0
         }
