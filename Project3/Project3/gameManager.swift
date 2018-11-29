@@ -8,41 +8,27 @@
 
 class GameManager {
     
-// Creation of the array which will contain the team chosen by the player
-    var team1Names = [String]()
-    var team2Names = [String]()
+    // Creation of the array which will contain the characters and their names, chosen by the player
+    var charactersNames = [String]()
     
-    var team1 = [Character]()
-    var team2 = [Character]()
+    var team1: [Character] = []
+    var team2: [Character] = []
     
-    var teamCount = 3
+    var numbersOfTurn = 0
+    var numberOfChest = 0
     
-//Variables containing the total health points of the team
-    var team1Life: Int {
-        return team1[0].life + team1[1].life + team1[2].life
-    }
-
-    var team2Life: Int {
-        return team2[0].life + team2[1].life + team2[2].life
-    }
+    var characterFactory = CharacterFactory()
+    var weaponFactory = WeaponFactory()
     
-// Creation of the variables which will containe the player's name
+    // Creation of the variables which will containe the player's name
     var player1Name = ""
     var player2Name = ""
     
-//// Variables containing the characters of the team 1
-//    var character1Team1 = Character(characterName: "", life: 0)
-//    var character2Team1 = Character(characterName: "", life: 0)
-//    var character3Team1 = Character(characterName: "", life: 0)
-//
-//// Variables containing the characters of the team 2
-//    var character1Team2 = Character(characterName: "", life: 0)
-//    var character2Team2 = Character(characterName: "", life: 0)
-//    var character3Team2 = Character(characterName: "", life: 0)
+
     
-// Function that will say Welcome !
+    // Function that will say Welcome !
     func welcome() {
-       print("Hello fighters, and welcome to Warlords !")
+        print("Hello fighters, and welcome to Warlords !")
     }
     
     // Function to display the team selection menu
@@ -50,80 +36,399 @@ class GameManager {
         print("Choose the next member of your team :"
             + "\n1. The Warrior, the classic striker."
             + "\n2. The Magus, great healer."
-            + "\n3. The Colossus,resistant but does not do a lot of damage."
+            + "\n3. The Colossus, resistant but does not do a lot of damage."
             + "\n4. The Dwarf, does a lot of damage but is not very resistant.")
     }
+ 
     
-    
-//// Function that display the name of the characters of the team
-//    func displayTeam1() {
-//        print("1. \(character1Team1.characterName) have \(character1Team1.life) life points")
-//        print("2. \(character2Team1.characterName) have \(character2Team1.life) life points")
-//        print("3. \(character3Team1.characterName) have \(character3Team1.life) life points")
-//    }
-//
-//    func displayTeam2() {
-//        print("1. \(character1Team2.characterName) have \(character1Team2.life) life points")
-//        print("2. \(character2Team2.characterName) have \(character2Team2.life) life points")
-//        print("3. \(character3Team2.characterName) have \(character3Team2.life) life points")
-//    }
-    
-// // Function for players to choose their actions
-//    func player1Turn() {
-//        print("\(player1Name) it's your turn."
-//            + "Here is your team :")
-//        displayTeam1()
-//        print("Here is your opponent's team :")
-//        displayTeam2()
-//        print("Who do you choose for attack or heal :"
-//            + "1. \(character1Team1.characterName)"
-//            + "2. \(character2Team1.characterName)"
-//            + "3. \(character3Team1.characterName)")
-//    }
-
-    
-//    func player2Turn() {
-//        print("\(player2Name) it's your turn."
-//            + "Here is your team :")
-//        displayTeam2()
-//        print("Here is your opponent's team :")
-//        displayTeam1()
-//        print("Who do you choose for attack or heal :"
-//            + "1. \(character1Team2.characterName)"
-//            + "2. \(character2Team2.characterName)"
-//            + "3. \(character3Team2.characterName)")
-//    }
-    
-    
-
-    
-// Function that will resume last actions
-    func resumeActions() {
+    func player1AllyChoice() -> Character {
         
+        var playerChoice: Character?
+        
+        if let choice = readLine() {
+            if choice == "1" {
+                playerChoice = team1[0]
+            } else if choice == "2" {
+                if team1.count == 1 {
+                    print("Error")
+                    return player1AllyChoice()
+                } else {
+                    playerChoice = team1[1]
+                }
+            } else if choice == "3" {
+                if team1.count == 2 {
+                    print("Error")
+                    return player1AllyChoice()
+                } else {
+                    playerChoice = team1[2]
+                }
+            } else {
+                print("Error")
+                return player1AllyChoice()
+            }
+        }
+        return playerChoice!
     }
     
-// Function for create a character
-    func createCharacter(teamName: inout [String], classe: Character, team: inout [Character]) -> Character {
-        var chosenName = ""
-
-            if let name = readLine() {
-                if teamName.contains(name) {
-                    repeat {
-                        print("This name already exists, choose another.")
-                        if let name = readLine() {
-                            chosenName = name
-                        }
-                    } while teamName.contains(chosenName)
-                    teamName.append(chosenName)
-                }else {
-                    teamName.append(name)
-                   team.append(classe)
+    func player1HealChoice() -> Character {
+        var playerChoice: Character?
+        
+        if let choice = readLine() {
+            if choice == "1" {
+                playerChoice = team1[0]
+            } else if choice == "2" {
+                if team1.count == 1 {
+                    print("Error")
+                    return player1HealChoice()
+                } else {
+                    playerChoice = team1[1]
+                }
+            } else if choice == "3" {
+                if team1.count == 2 {
+                    print("Error")
+                    return player1HealChoice()
+                } else {
+                    playerChoice = team1[2]
+                }
+            } else {
+                print("Error")
+                return player1HealChoice()
+            }
         }
-   }
-        return classe
-}
+        return playerChoice!
+    }
     
-// Function that will create the player's team
+    func player1OpponentChoice() -> Character {
+        var playerChoice: Character?
+        
+        if let choice = readLine() {
+            if choice == "1" {
+                playerChoice = team2[0]
+            } else if choice == "2" {
+                if team2.count == 1 {
+                    print("Error")
+                    return player1OpponentChoice()
+                } else {
+                    playerChoice = team2[1]
+                }
+            } else if choice == "3" {
+                if team2.count == 2 {
+                    print("Error")
+                    return player1OpponentChoice()
+                } else {
+                    playerChoice = team2[2]
+                }
+            } else {
+                print("Error")
+                return player1OpponentChoice()
+            }
+        }
+        return playerChoice!
+    }
+    
+    func player2AllyChoice() -> Character {
+        var playerChoice: Character?
+        
+        if let choice = readLine() {
+            if choice == "1" {
+                playerChoice = team2[0]
+            } else if choice == "2" {
+                if team2.count == 1 {
+                    print("Error")
+                    return player2AllyChoice()
+                } else {
+                    playerChoice = team2[1]
+                }
+            } else if choice == "3" {
+                if team2.count == 2 {
+                    print("Error")
+                    return player2AllyChoice()
+                } else {
+                    playerChoice = team2[2]
+                }
+            } else {
+                print("Error")
+                return player2AllyChoice()
+            }
+        }
+        return playerChoice!
+    }
+    
+    func player2HealChoice() -> Character {
+        var playerChoice: Character?
+        
+        if let choice = readLine() {
+            if choice == "1" {
+                playerChoice = team2[0]
+            } else if choice == "2" {
+                playerChoice = team2[1]
+                if playerChoice == nil {
+                    print("Error")
+                    return player2HealChoice()
+                } else {
+                    playerChoice = team2[1]
+                }
+            } else if choice == "3" {
+                playerChoice = team2[2]
+                if playerChoice == nil {
+                    print("Error")
+                    return player2HealChoice()
+                } else {
+                    playerChoice = team2[2]
+                }
+            } else {
+                print("Error")
+                return player2HealChoice()
+            }
+        }
+        return playerChoice!
+    }
+    
+    func player2OpponentChoice() -> Character {
+        var playerChoice: Character?
+        
+        if let choice = readLine() {
+            if choice == "1" {
+                playerChoice = team1[0]
+            } else if choice == "2" {
+                if team1.count == 1 {
+                    print("Error")
+                    return player2OpponentChoice()
+                } else {
+                    playerChoice = team1[1]
+                }
+            } else if choice == "3" {
+                if team1.count == 2 {
+                    print("Error")
+                    return player2OpponentChoice()
+                } else {
+                    playerChoice = team1[2]
+                }
+            } else {
+                print("Error")
+                return player2OpponentChoice()
+            }
+        }
+        return playerChoice!
+    }
+    
+    // Functions that will be used to attack the opposing team
+    
+    func player1Attack(player1Ally: Character, player1Opponent: Character) {
+        
+        guard let indexTeam2 = team2.firstIndex(where: { character in character.name == player1Opponent.name }) else {
+            return
+        }
+        
+        player1Ally.attack(character: player1Opponent)
+        resumeAttackActions(attackedCharacter: player1Opponent)
+        if player1Opponent.life == 0 {
+            team2.remove(at: indexTeam2)
+            print("\(player1Opponent.name) The \(player1Opponent.type) is dead.")
+        }  
+    }
+    
+    func player2Attack(player2Ally: Character, player2Opponent: Character) {
+        
+        guard let indexTeam1 = team1.firstIndex(where: { character in character.name == player2Opponent.name }) else {
+            return
+        }
+        
+        player2Ally.attack(character: player2Opponent)
+        resumeAttackActions(attackedCharacter: player2Opponent)
+        if player2Opponent.life == 0 {
+            team1.remove(at: indexTeam1)
+            print("\(player2Opponent.name) The \(player2Opponent.type) is dead.")
+        }
+    }
+    
+    // Functions that will serve to heal his own team
+    
+    func player1Heal(player1Ally: Character, player1Heal: Character) {
+        
+        player1Ally.heal(character: player1Heal)
+        resumeHealActions(healedCharacter: player1Heal)
+    }
+    
+    func player2Heal(player2Ally: Character, player2Heal: Character) {
+        
+        player2Ally.heal(character: player2Heal)
+        resumeHealActions(healedCharacter: player2Heal)
+    }
+    
+    
+    // Function that display the name of the characters of the team
+    func displayTeam1() {
+        for character in team1 {
+            print("\(character.name) The \(character.type) has \(character.life) life points.")
+        }
+    }
+    
+    func displayTeam2() {
+        for character in team2 {
+            print("\(character.name) The \(character.type) has \(character.life) life points.")
+        }
+    }
+    
+    // Function for players to choose their actions
+    func player1Turn() {
+            
+        print("\(player1Name) it's your turn.")
+        print("Here is your team :")
+        displayTeam1()
+        print("Here is your opponent's team :")
+        displayTeam2()
+        print("Who do you choose :")
+        for character in team1 {
+            print("\(character.name) The \(character.type)")
+        }
+        let player1Character = player1AllyChoice()
+        let getRandomInt = Int.random(in: 1...3)
+        let getRandomWeapon = Int.random(in: 1...9)
+        
+        if getRandomInt == 2 {
+            print("Wow, a chest appears !")
+            print("\(player1Character.name) open the chest..")
+            let weaponRawValue = getRandomWeapon
+            let weaponType = WeaponFactory.Category(rawValue: weaponRawValue)
+            
+            let randomWeapon = weaponFactory.create(weaponType!)
+            print("..and found a \(randomWeapon.name) !")
+            
+            if player1Character.type == "Magus" && randomWeapon.isAttack == false {
+                player1Character.weapon = randomWeapon
+                print("\(player1Character.name) equips himself with \(randomWeapon.name)")
+            } else if player1Character.type == "Magus" && randomWeapon.isAttack == true {
+                print("\(player1Character.name) can not equips himself with \(randomWeapon.name)")
+            } else if player1Character.type != "Magus" && randomWeapon.isAttack == false {
+                print("\(player1Character.name) can not equips himself with \(randomWeapon.name)")
+            } else {
+                player1Character.weapon = randomWeapon
+                print("\(player1Character.name) equips himself with \(randomWeapon.name)")
+            }
+            numberOfChest += 1
+            }
+        if player1Character.type == "Magus" {
+            print("Who do you want to heal ?")
+            displayTeam1()
+            
+            let player1CharacterForHeal = player1HealChoice()
+            player1Heal(player1Ally: player1Character, player1Heal: player1CharacterForHeal)
+        } else {
+            print("Who do you want to attack ?")
+            displayTeam2()
+            
+            let player1CharacterOpponent = player1OpponentChoice()
+            player1Attack(player1Ally: player1Character, player1Opponent: player1CharacterOpponent)
+        }
+    }
+
+    
+    func player2Turn() {
+            
+        print("\(player2Name) it's your turn.")
+        print("Here is your team :")
+        displayTeam2()
+        print("Here is your opponent's team :")
+        displayTeam1()
+        print("Who do you choose :")
+        for character in team2 {
+            print("\(character.name) The \(character.type)")
+        }
+        
+        
+        let player2Character = player2AllyChoice()
+        
+        let getRandomInt = Int.random(in: 1...3)
+        let getRandomWeapon = Int.random(in: 1...9)
+        
+        if getRandomInt == 2 {
+            print("Wow, a chest appears !")
+            print("\(player2Character.name) open the chest..")
+            let weaponRawValue = getRandomWeapon
+            let weaponType = WeaponFactory.Category(rawValue: weaponRawValue)
+            
+            let randomWeapon = weaponFactory.create(weaponType!)
+            print("..and found a \(randomWeapon.name) !")
+            
+            if player2Character.type == "Magus" && randomWeapon.isAttack == false {
+                player2Character.weapon = randomWeapon
+                print("\(player2Character.name) equips himself with \(randomWeapon.name)")
+            } else if player2Character.type == "Magus" && randomWeapon.isAttack == true {
+                print("\(player2Character.name) can not equips himself with \(randomWeapon.name)")
+            } else if player2Character.type != "Magus" && randomWeapon.isAttack == false {
+                print("\(player2Character.name) can not equips himself with \(randomWeapon.name)")
+            } else {
+                player2Character.weapon = randomWeapon
+                print("\(player2Character.name) equips himself with \(randomWeapon.name)")
+            }
+            numberOfChest += 1
+        }
+        
+        if player2Character.type == "Magus" {
+            print("Who do you want to heal ?")
+            displayTeam2()
+            
+            let player2CharacterForHeal = player2HealChoice()
+            player2Heal(player2Ally: player2Character, player2Heal: player2CharacterForHeal)
+        } else {
+            print("Who do you want to attack ?")
+            displayTeam1()
+            
+            let player2CharacterOpponent = player2OpponentChoice()
+            player2Attack(player2Ally: player2Character, player2Opponent: player2CharacterOpponent)
+        }
+        numbersOfTurn += 1
+    }
+    
+    // Function that will resume last actions
+    func resumeHealActions(healedCharacter: Character) {
+        print("\(healedCharacter.name) The \(healedCharacter.type) was healed.")
+        print("\(healedCharacter.name) The \(healedCharacter.type) has now \(healedCharacter.life) life points.")
+    }
+    
+    func resumeAttackActions(attackedCharacter: Character) {
+        print("\(attackedCharacter.name) The \(attackedCharacter.type) was attacked.")
+        print("\(attackedCharacter.name) has now \(attackedCharacter.life) life points.")
+    }
+    
+    // Function that will create a unique name for characters
+    func getUniqueName() -> String {
+        if var chosenName = readLine() {
+            while charactersNames.contains(chosenName) {
+                print("This name already exists, choose another.")
+                if let name = readLine() {
+                    chosenName = name
+                }
+            }
+            charactersNames.append(chosenName)
+            return chosenName
+        } else {
+            return getUniqueName()
+        }
+    }
+    
+    // Function for create a character
+    func createCharacter() -> Character {
+        teamSelectionMenu()
+        
+        if let type = readLine(),
+            let characterRawValue = Int(type),
+            let characterType = CharacterFactory.CharacterType(rawValue: characterRawValue) {
+            
+            print("What's his name ?")
+            
+            let name = getUniqueName()
+            let character = characterFactory.create(characterType, name: name)
+            return character
+            
+        } else {
+            print("Error !")
+            return createCharacter()
+        }
+    }
+    
+    // Function that will create the player's team
     func createTeam1() {
         print("Player One, what's your name ?")
         if let playerName = readLine(){
@@ -134,38 +439,10 @@ class GameManager {
         print("You have to choose 3 characters.")
         
         for _ in 1...3 {
-            
-            var player1Choice = ""
-            
-             teamSelectionMenu()
-            repeat {
-            if let choice = readLine() {
-                player1Choice = choice
-                switch choice {
-                case "1":
-                    print("You choose The Warior, what's his name ?")
-                    createCharacter(teamName: &team1Names, classe: Warrior(), team: &team1)
-                    
-                case "2":
-                    print("You choose The Magus, what's his name ?")
-                    createCharacter(teamName: &team1Names, classe: Magus(), team: &team1)
-                    
-                case "3":
-                    print("You choose The Colossus, what's his name ?")
-                    createCharacter(teamName: &team1Names, classe: Colossus(), team: &team1)
-                    
-                case "4":
-                    print("You choose The Dwarf, what's his name ?")
-                    createCharacter(teamName: &team1Names, classe: Dwarf(), team: &team1)
-                    
-                default:
-                    print("I don't understand.")
-                    teamSelectionMenu()
-                }
-            }
-        } while player1Choice != "1" && player1Choice != "2" && player1Choice != "3" && player1Choice != "4"
+            let character = createCharacter()
+            team1.append(character)
+        }
     }
-}
     
     // Function that will create the player's team
     func createTeam2() {
@@ -175,59 +452,62 @@ class GameManager {
             print("Welcome to the batlle \(playerName) !")
         }
         
-           print("You have to choose 3 characters too.")
-        
-        
-        for _ in 1...3 {
-            
-            var player2Choice = ""
-            
-            teamSelectionMenu()
-            repeat {
-                if let choice = readLine() {
-                 player2Choice = choice
-                    
-                switch choice {
-                case "1":
-                    print("You choose The Warior, what's his name ?")
-                    createCharacter(teamName: &team2Names, classe: Warrior(), team: &team2)
-                    
-                case "2":
-                    print("You choose The Magus, what's his name ?")
-                    createCharacter(teamName: &team2Names, classe: Magus(), team: &team2)
-                    
-                case "3":
-                    print("You choose The Colossus, what's his name ?")
-                    createCharacter(teamName: &team2Names, classe: Colossus(), team: &team2)
-                    
-                case "4":
-                    print("You choose The Dwarf, what's his name ?")
-                    createCharacter(teamName: &team2Names, classe: Dwarf(), team: &team2)
-                    
-                default:
-                    print("I don't understand.")
-                    teamSelectionMenu()
-                }
-            }
-        } while player2Choice != "1" && player2Choice != "2" && player2Choice != "3" && player2Choice != "4"
-    }
-}
+        print("You have to choose 3 characters too.")
     
-//Function for the unfolding of the party
+        for _ in 1...3 {
+            let character = createCharacter()
+            team2.append(character)
+        }
+    }
+    
+    //Function for the unfolding of the party
     func playGame() {
-
+        
         welcome()
         createTeam1()
         createTeam2()
         
+        while team1.count != 0 || team2.count != 0 {
+            
+            if team1.isEmpty {
+                break
+            } else if team2.isEmpty {
+                break
+            } else {
+            player1Turn()
+            player2Turn()
+            }
+        }
         
-//        while team1Life > 0 && team2Life > 0 {
-//
-//        }
+        if team1.count == 0 {
+            print("\(player2Name) is the Winner !")
+        } else {
+            print("\(player1Name) is the Winner !")
+        }
         
-        
-}
+        print("In this game, \(numbersOfTurn) turns were played, \(numberOfChest) chests were found and \(numberOfCriticalStrike) critical strike were inflicted.")
+        displayNewgame()
+        newGame()
+    }
     
+    func displayNewgame() {
+        print("Do you want to play a new game ?")
+        print("1. Yes.")
+        print("2. No.")
+    }
+    
+    func newGame() {
+        if let choice = readLine() {
+            if choice == "1" {
+                return playGame()
+            } else if choice == "2" {
+                print("Thanks for playing Warlords !")
+            } else {
+                print("Error")
+                return newGame()
+            }
+        }
+    }
     
 }
 
