@@ -8,7 +8,9 @@
 
 var gameManager = GameManager()
 
+gameManager.initGame()
 gameManager.playGame()
+gameManager.launchNewGame()
 
 
 

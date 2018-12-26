@@ -6,11 +6,19 @@
 //  Copyright © 2018 Nicolas Lion. All rights reserved.
 //
 
-
+/// Class Weapon Initialization
 class Weapon {
+    
+    /// Property for the damage of the weapon
     var damages: Int
+    
+    /// Property for the quantity of heal
     var heal: Int
+    
+    /// Property to differentiate heal and attack weapons
     var isAttack: Bool
+    
+    /// Property for the weapon's name
     var name: String
     
     init(damages: Int, heal: Int, isAttack: Bool, name: String) {
@@ -21,8 +29,10 @@ class Weapon {
     }
 }
 
+/// Class Weapon Factory Initialization
 class WeaponFactory {
     
+    /// Enumeration of all weapons
     enum Category: Int {
         case OneHandedSword = 1
         case TwoHandedSword = 2
@@ -35,6 +45,7 @@ class WeaponFactory {
         case MagicWand = 9
     }
     
+    /// Function that will create the weapons
     func create(_ category: Category) -> Weapon {
         switch category {
         case .OneHandedSword: return Weapon(damages: 10, heal: 0, isAttack: true, name: "One Handed Sword")
@@ -48,74 +59,4 @@ class WeaponFactory {
         case .MagicWand: return Weapon(damages: 0, heal: 7, isAttack: false, name: "Magic Wand")
         }
     }
-    
-//    func createRandomAttackWeapon() -> Weapon {
-//        
-//    }
-//    
-//    func createRandomHealWeapon() -> Weapon {
-//        
-//    }
-    
 }
-
-////Class AttackWeapons initialization
-//class AttackWeapon: Weapon {
-//
-//}
-//
-////Class HealWeapons initialization
-//class HealWeapon: Weapon {
-//
-//    }
-
-
-
-////Class OneHandedSword Initialization
-//class OneHandedSword: AttackWeapon {
-//    init() {
-//        super.init(damages: 10, heal: 0)
-//    }
-//}
-//
-////Class TwoHandedSword Initialization
-//class TwoHandedSword: AttackWeapon {
-//    init() {
-//        super.init(damages: 15, heal: 0)
-//    }
-//}
-//
-////Class OneHandedMass Initialization
-//class OneHandedMass: AttackWeapon {
-//    init() {
-//        super.init(damages: 5, heal: 0)
-//    }
-//}
-//
-////Class TwoHandedMass Initialization
-//class TwoHandedMass: AttackWeapon {
-//    init() {
-//        super.init(damages: 12, heal: 0)
-//    }
-//}
-//
-////Class TwoHandedAxe Initialization
-//class TwoHandedAxe: AttackWeapon {
-//    init() {
-//        super.init(damages: 20, heal: 0)
-//    }
-//}
-//
-////Class MagicStick Initialisation
-//class MagicStick: HealWeapon {
-//    init() {
-//        super.init(damages: 0, heal: 10)
-//    }
-//}
-//
-////Class MagicWand Initialization
-//class MagicWand: HealWeapon {
-//    init() {
-//        super.init(damages: 0, heal: 7)
-//    }
-//}
