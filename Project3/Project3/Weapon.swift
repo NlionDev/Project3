@@ -9,17 +9,17 @@
 /// Class Weapon Initialization
 class Weapon {
     
-/// Property for the damage of the weapon
-    internal var damages: Int
+    /// Property for the damage of the weapon
+    var damages: Int
     
-/// Property for the quantity of heal
-    internal var heal: Int
+    /// Property for the quantity of heal
+    var heal: Int
     
-/// Property to differentiate heal and attack weapons
-    internal var isAttack: Bool
+    /// Property to differentiate heal and attack weapons
+    var isAttack: Bool
     
-/// Property for the weapon's name
-    internal var name: String
+    /// Property for the weapon's name
+    var name: String
     
     init(damages: Int, heal: Int, isAttack: Bool, name: String) {
         self.damages = damages
@@ -32,7 +32,7 @@ class Weapon {
 /// Class Weapon Factory Initialization
 class WeaponFactory {
     
-/// Enumeration of all weapons
+    /// Enumeration of all weapons
     enum Category: Int {
         case OneHandedSword = 1
         case TwoHandedSword = 2
@@ -45,8 +45,8 @@ class WeaponFactory {
         case MagicWand = 9
     }
     
-/// Function that will create the weapons
-    internal func create(_ category: Category) -> Weapon {
+    /// Function that will create the weapons
+    func create(_ category: Category) -> Weapon {
         switch category {
         case .OneHandedSword: return Weapon(damages: 10, heal: 0, isAttack: true, name: "One Handed Sword")
         case .TwoHandedSword: return Weapon(damages: 15, heal: 0, isAttack: true, name: "Two Handed Sword")

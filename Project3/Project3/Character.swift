@@ -8,13 +8,18 @@
 
 
 /// Variable that counts the number of critical strikes inflicted
-internal var numberOfCriticalStrike = 0
+ var numberOfCriticalStrike = 0
 
 
 /// Design pattern factory for create characters
 class CharacterFactory {
     
-/// Enumeration for all characters type
+    /// Enumeration for all characters type
+    ///
+    /// - Warrior: The Warrior is the classic character, good points of life and moderate damage.
+    /// - Magus: The Magus can not do damage but can heal his allies
+    /// - Colossus: The Colossus has a lot of health but does not do much damage
+    /// - Dwarf: The Dwarf does not have a lot of health but does a lot of damage.
     enum CharacterType: Int {
         case Warrior = 1
         case Magus = 2
@@ -23,11 +28,19 @@ class CharacterFactory {
     }
     
     
-/// Instance of Weapon Factory
-    internal var weaponFactory = WeaponFactory()
+     /// Instance of Weapon Factory
+     var weaponFactory = WeaponFactory()
     
-/// Function that will create characters
-    internal func create(_ type: CharacterType, name: String) -> Character {
+     /// Function that will create characters
+     ///
+     /// - Parameters:
+     ///   - type: This is the Character Type (Ex: Warrior)
+     ///   - name: This is the name of the Character
+     ///   - life: This is the life points of the character
+     ///   - weapon: This is the default weapon of the character
+     ///   - status: This is the character's life status
+     /// - Returns: This function will return a Character
+     func create(_ type: CharacterType, name: String) -> Character {
         switch type {
         case .Warrior: return Character(name: name, type: "Warrior", life: 100, weapon: weaponFactory.create(.OneHandedSword), status: "is alive")
         case .Magus: return Character(name: name, type: "Magus", life: 80, weapon: weaponFactory.create(.MagicWand), status: "is alive")
@@ -40,20 +53,20 @@ class CharacterFactory {
 /// Class Character Initialization
 class Character {
     
-/// Property for character's name
-    internal var name: String
+    /// Property for character's name
+    var name: String
     
-/// Property for character's type ( warrior, magus..)
-    internal var type: String
+    /// Property for character's type ( warrior, magus..)
+    var type: String
     
-/// Property for character's life
-    internal var life: Int
+    /// Property for character's life
+    var life: Int
     
-/// Property for character's weapon
-    internal var weapon: Weapon
+    /// Property for character's weapon
+    var weapon: Weapon
     
-/// Property for character's status ( alive or dead )
-    internal var status: String
+    /// Property for character's status ( alive or dead )
+    var status: String
     
     init (name: String, type: String, life: Int, weapon: Weapon, status: String) {
         self.name = name
@@ -63,24 +76,30 @@ class Character {
         self.status = status
     }
     
-/// Function for the character to attack
-    internal func attack(character: Character) {
+     /// Function for the character to attack
+     ///
+     /// - Parameter character: This is the character who will do the attack
+     func attack(character: Character) {
         character.takeDamages(damages: weapon.damages)
     }
     
-    
-/// Function for the character to heal
-    internal func heal(character: Character) {
+
+     /// Function for the character to heal
+     ///
+     /// - Parameter character: This is the character who will do the heal
+     func heal(character: Character) {
         character.takeHeal(heal: weapon.heal)
     }
     
-/// Function for the character to receive damages
-    internal func takeDamages(damages: Int) {
+    /// Function for the character to receive damages
+    ///
+    /// - Parameter damages: This is the number of damages that will be inflicted
+    func takeDamages(damages: Int) {
         
-/// Variable to get a random number
+        /// Variable to get a random number
         let criticalRandom = Int.random(in: 1...3)
         
-/// Variable for the power of the critical strike
+        /// Variable for the power of the critical strike
         let criticalStrike = damages * 2
         
         if criticalRandom == 2 {
@@ -95,8 +114,10 @@ class Character {
         }
     }
     
-/// Function for the character to receive heal
-    internal func takeHeal(heal: Int) {
+     /// Function for the character to receive heal
+     ///
+     /// - Parameter heal: This is the number of life points that will be healed
+     func takeHeal(heal: Int) {
         life += heal
     }
     
