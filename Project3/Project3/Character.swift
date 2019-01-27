@@ -27,7 +27,6 @@ class CharacterFactory {
         case Dwarf = 4
     }
     
-    
      /// Instance of Weapon Factory
      var weaponFactory = WeaponFactory()
     
@@ -79,16 +78,27 @@ class Character {
      /// Function for the character to attack
      ///
      /// - Parameter character: This is the character who will do the attack
-     func attack(character: Character) {
-        character.takeDamages(damages: weapon.damages)
+//     func attack(character: Character) {
+//        character.takeDamages(damages: weapon.damages)
+//    }
+    
+    /// Functions that will be used to attack
+    func attack(defender: Character) {
+        defender.takeDamages(damages: weapon.damages)
+        gameManager.resumeAttackActions(attackedCharacter: defender)
+        if defender.life == 0 {
+            print("\(defender.name) The \(defender.type) is dead.")
+            defender.status = "is dead ☠️"
+        }
     }
     
 
      /// Function for the character to heal
      ///
      /// - Parameter character: This is the character who will do the heal
-     func heal(character: Character) {
-        character.takeHeal(heal: weapon.heal)
+     func heal(healed: Character) {
+        healed.takeHeal(heal: weapon.heal)
+        gameManager.resumeHealActions(healedCharacter: healed)
     }
     
     /// Function for the character to receive damages

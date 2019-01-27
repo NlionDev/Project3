@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03713C53217399360083A43A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03713C52217399360083A43A /* main.swift */; };
+		0385953F21FDB4CB0008DB70 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385953E21FDB4CB0008DB70 /* Player.swift */; };
 		039FF1F52189D32500F4D1C4 /* gameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039FF1F42189D32500F4D1C4 /* gameManager.swift */; };
 		039FF1FB2190414900F4D1C4 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039FF1FA2190414900F4D1C4 /* Character.swift */; };
 		039FF1FD2190416600F4D1C4 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039FF1FC2190416500F4D1C4 /* Weapon.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		03713C4F217399360083A43A /* Project3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Project3; sourceTree = BUILT_PRODUCTS_DIR; };
 		03713C52217399360083A43A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		0385953E21FDB4CB0008DB70 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		039FF1F42189D32500F4D1C4 /* gameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameManager.swift; sourceTree = "<group>"; };
 		039FF1FA2190414900F4D1C4 /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		039FF1FC2190416500F4D1C4 /* Weapon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				039FF1F42189D32500F4D1C4 /* gameManager.swift */,
+				0385953E21FDB4CB0008DB70 /* Player.swift */,
 				039FF1FA2190414900F4D1C4 /* Character.swift */,
 				03713C52217399360083A43A /* main.swift */,
 				039FF1FC2190416500F4D1C4 /* Weapon.swift */,
@@ -131,6 +134,7 @@
 				03713C53217399360083A43A /* main.swift in Sources */,
 				039FF1FD2190416600F4D1C4 /* Weapon.swift in Sources */,
 				039FF1FB2190414900F4D1C4 /* Character.swift in Sources */,
+				0385953F21FDB4CB0008DB70 /* Player.swift in Sources */,
 				039FF1F52189D32500F4D1C4 /* gameManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
